@@ -14,9 +14,9 @@ namespace TasksForModul8
         }
     }
 
-    public class Disc
+    public class Drive
     {
-        public Disc(string name, long space, long freeSpace)
+        public Drive(string name, long space, long freeSpace)
         {
             Name = name;
             Space = space;
