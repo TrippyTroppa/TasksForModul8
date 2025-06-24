@@ -16,7 +16,7 @@ namespace TasksForModul8
 
     public class Disc
     {
-        public Disc(string name, long space, long freeSpace) 
+        public Disc(string name, long space, long freeSpace)
         {
             Name = name;
             Space = space;
@@ -27,4 +27,17 @@ namespace TasksForModul8
         public long Space { get; }
         public long FreeSpace { get; }
     }
+
+    public class Folder
+    {
+        public List<string> Files { get; set; } = new List<string>();
+    
+
+     Dictionary<string, Folder> Folders = new Dictionary<string, Folder>();
+
+        public void CreateFolder(string name)
+        {
+            Folders.Add(name, new Folder());
+        }
+    } 
 }
