@@ -7,65 +7,21 @@ namespace TasksForModul8
     {
         static void Main(string[] args)
         {
-            GetCatalogs();
-        }
-
-        static void GetCatalogs()
-        {
-            string dirName = @"C:\";
-            if (Directory.Exists(dirName))
+            try
             {
-                Console.WriteLine("Папки:");
-                string[] dirs = Directory.GetDirectories(dirName);
-                foreach (string d in dirs)
-                    Console.WriteLine(d);
+                DirectoryInfo dirinfo = new DirectoryInfo(@"C:\Users\1\Desktop\TestFolder");
+                string TrashPass = @"C:\$Recycle.Bin\TestFolder";
 
-                Console.WriteLine("\nФайлы:");
-                string[] files = Directory.GetFiles(dirName);
-                foreach (string s in files)
-                    Console.WriteLine(s);
-
-                try
-                {
-                    DirectoryInfo dirInfo = new DirectoryInfo(dirName);
-                    int totalObjects = dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length;
-                    Console.WriteLine($"\nОбщее количество объектов: {totalObjects}");
-
-                    // Создаем временную директорию
-                    string tempDirPath = @"C:\newDirectory";
-                    DirectoryInfo newDirectory = new DirectoryInfo(tempDirPath);
-
-                    if (!newDirectory.Exists)
-                    {
-                        newDirectory.Create();
-                        Console.WriteLine($"\nСоздана директория: {tempDirPath}");
-                    }
-
-                    // Проверяем, что директория появилась
-                    if (Directory.Exists(tempDirPath))
-                    {
-                        Console.WriteLine($"Количество объектов после создания: {dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length}");
-                    }
-
-                    // Удаляем директорию
-                    newDirectory.Delete(true);
-                    Console.WriteLine($"\nДиректория {tempDirPath} удалена.");
-
-                    // Проверяем, что директории больше нет
-                    if (!Directory.Exists(tempDirPath))
-                    {
-                        Console.WriteLine($"Количество объектов после удаления: {dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length}");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Ошибка: {e.Message}");
-                }
+                dirinfo.MoveTo(TrashPass);
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Директория не существует!");
+                Console.WriteLine(ex.Message);
             }
+
+
+
+
         }
     }
 }
