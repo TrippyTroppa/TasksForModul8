@@ -12,34 +12,49 @@ namespace TasksForModul8
     {
         static void Main(string[] args)
         {
-            GetCatalogs(); //   Вызов метода получения директорий
+            GetCatalogs(); 
         }
 
         static void GetCatalogs()
         {
-            string dirName = @"\"; // Прописываем путь к корневой директории MacOS (для Windows скорее всего тут будет "C:\\")
-            if (Directory.Exists(dirName)) // Проверим, что директория существует
+            string dirName = @"C:\\"; 
+            if (Directory.Exists(dirName)) 
             {
                 Console.WriteLine("Папки:");
-                string[] dirs = Directory.GetDirectories(dirName);  // Получим все директории корневого каталога
-                int folderCount = dirs.Length;
+                string[] dirs = Directory.GetDirectories(dirName);  
 
-                foreach (string d in dirs) // Выведем их все
+
+                foreach (string d in dirs) 
                     Console.WriteLine(d);
 
                 Console.WriteLine();
-                Console.WriteLine("Файлы:");
-                string[] files = Directory.GetFiles(dirName);// Получим все файлы корневого каталога
-                int fileCount = files.Length;
 
-                foreach (string s in files)   // Выведем их все
+
+                Console.WriteLine("Файлы:");
+                string[] files = Directory.GetFiles(dirName);
+
+
+                foreach (string s in files)   
                     Console.WriteLine(s);
 
-                Console.WriteLine();
-                Console.WriteLine($"Итого объектов: {folderCount + fileCount}");
-                Console.WriteLine($"Из них:");
-                Console.WriteLine($"- Папок: {folderCount}");
-                Console.WriteLine($"- Файлов: {fileCount}");
+                try
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(@"C:\\");
+                    if (dirInfo.Exists)
+                    {
+                        Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
+                    }
+
+                    DirectoryInfo newDirectory = new DirectoryInfo(@"/newDirectory");
+                    if (!newDirectory.Exists)
+                        newDirectory.Create();
+
+                    Console.WriteLine(dirInfo.GetDirectories().Length + dirInfo.GetFiles().Length);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
         }
     }
