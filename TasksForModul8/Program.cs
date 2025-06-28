@@ -5,23 +5,17 @@ namespace TasksForModul8
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            try
+            string filePath = @"C:\Users\1\Desktop\Курсы\Modul8\TasksForModul8\TasksForModul8\Program.cs"; // Укажем путь
+
+            // Откроем файл и прочитаем его содержимое
+            using (StreamReader sr = File.OpenText(filePath))
             {
-                DirectoryInfo dirinfo = new DirectoryInfo(@"C:\Users\1\Desktop\TestFolder");
-                string TrashPass = @"C:\$Recycle.Bin\TestFolder";
-
-                dirinfo.MoveTo(TrashPass);
+                string str = "";
+                while ((str = sr.ReadLine()) != null)
+                    Console.WriteLine(str);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-
-
-
         }
     }
 }
