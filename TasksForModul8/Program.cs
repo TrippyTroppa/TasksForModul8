@@ -7,10 +7,15 @@ namespace TasksForModul8
     {
         public static void Main()
         {
-            string filePath = @"C:\Users\1\Desktop\Курсы\Modul8\TasksForModul8\TasksForModul8\Program.cs"; // Укажем путь
+            var fi = new FileInfo ( @"C:\Users\1\Desktop\Курсы\Modul8\TasksForModul8\TasksForModul8\Program.cs"); // Укажем путь
+
+            using (StreamWriter sw = fi.AppendText())
+            {
+                sw.WriteLine($"\nВремя запуска: {DateTime.Now}");
+            }
 
             // Откроем файл и прочитаем его содержимое
-            using (StreamReader sr = File.OpenText(filePath))
+            using (StreamReader sr = fi.OpenText())
             {
                 string str = "";
                 while ((str = sr.ReadLine()) != null)
@@ -19,3 +24,5 @@ namespace TasksForModul8
         }
     }
 }
+
+Время запуска: 28.06.2025 22:50:48
