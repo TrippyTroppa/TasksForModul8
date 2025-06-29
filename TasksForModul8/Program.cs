@@ -7,22 +7,21 @@ namespace TasksForModul8
     {
         public static void Main()
         {
-            var fi = new FileInfo ( @"C:\Users\1\Desktop\Курсы\Modul8\TasksForModul8\TasksForModul8\Program.cs"); // Укажем путь
+            string FilePath = @"C:\Users\1\Desktop\BinaryFile.bin";
 
-            using (StreamWriter sw = fi.AppendText())
+            if (File.Exists(FilePath))
             {
-                sw.WriteLine($"\nВремя запуска: {DateTime.Now}");
-            }
+                string StringValue;
 
-            // Откроем файл и прочитаем его содержимое
-            using (StreamReader sr = fi.OpenText())
-            {
-                string str = "";
-                while ((str = sr.ReadLine()) != null)
-                    Console.WriteLine(str);
+                using (BinaryReader reader = new BinaryReader(File.Open(FilePath, FileMode.Open)))
+                {
+                    StringValue = reader.ReadString();
+                }
+
+                Console.WriteLine($"Из файла прочитано:\n {StringValue}");
             }
         }
     }
 }
 
-Время запуска: 28.06.2025 22:50:48
+
