@@ -7,19 +7,26 @@ namespace TasksForModul8
     {
         public static void Main()
         {
-            string FilePath = @"C:\Users\1\Desktop\BinaryFile.bin";
+            WriteValues();
+            ReadValues();
+        }
 
-            if (File.Exists(FilePath))
+        static void WriteValues()
+        {
+            using (BinaryWriter writer = new BinaryWriter(File.Open(@"C:\Users\1\Desktop\BinaryFile.bin", FileMode.Open)))
+                writer.Write($"Файл изменен {DateTime.Now} на компьютере c ОС {Environment.OSVersion}");
+        }
+
+        static void ReadValues()
+        {
+            string StrValue;
+
+            using (BinaryReader reader = new BinaryReader(File.Open(@"C:\Users\1\Desktop\BinaryFile.bin", FileMode.Open)))
             {
-                string StringValue;
-
-                using (BinaryReader reader = new BinaryReader(File.Open(FilePath, FileMode.Open)))
-                {
-                    StringValue = reader.ReadString();
-                }
-
-                Console.WriteLine($"Из файла прочитано:\n {StringValue}");
+                StrValue = reader.ReadString();
             }
+
+            Console.WriteLine(StrValue);
         }
     }
 }
